@@ -1,14 +1,19 @@
 {
-  "routes": [
+  "version": 2,
+  "builds": [
     {
-      "src": "/api/ocr",
-      "dest": "/api/ocr.js",
-      "methods": ["POST"]
+      "src": "api/*.js",
+      "use": "@vercel/node"
     },
     {
-      "src": "/api/summarize",
-      "dest": "/api/summarize.js",
-      "methods": ["POST"]
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
