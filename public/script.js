@@ -22,7 +22,7 @@ const modelName = document.getElementById("modelName");
 let mediaStream = null;
 let currentModel = "fast";
 let speaking = false;
-const API_URL = ""; // Same domain as frontend
+const API_URL = "http://localhost:3000"; // Same domain as frontend
 
 // Initialize
 document.addEventListener("keydown", (e) => {
