@@ -1,0 +1,18 @@
+{
+  "routes": [
+    {
+      "src": "/api/ocr",
+      "dest": "/api/ocr.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/api/summarize",
+      "dest": "/api/summarize.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ]
+}
