@@ -8,8 +8,8 @@ export default async function handler(req, res) {
     if (!text) return res.status(400).json({ error: 'No text provided' });
 
     const modelMap = {
-      'fast': 'deepseek/deepseek-r1-distill-qwen-32b:free',
-      'accurate': 'deepseek/deepseek-r1:free'
+      'fast': 'deepseek/deepseek-r1-0528-qwen3-8b:free',
+      'accurate': 'deepseek/deepseek-r1-0528-qwen3-8b:free'
     };
 
     const selectedModel = modelMap[modelType];
