@@ -18,6 +18,8 @@ const speakBtn = document.getElementById("speakBtn");
 const speedControl = document.getElementById("speedControl");
 const modelInfo = document.getElementById("modelInfo");
 const modelName = document.getElementById("modelName");
+const synthesis = window.speechSynthesis;
+
 
 let mediaStream = null;
 let currentModel = "fast";
