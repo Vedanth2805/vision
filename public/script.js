@@ -26,6 +26,10 @@ let currentModel = "fast";
 let speaking = false;
 const API_URL = "http://localhost:3000"; // Same domain as frontend
 
+let extractedEventText = "";// global variable to store ocr result
+
+
+
 // Initialize
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && captureBtn.style.display !== "none") {
@@ -115,6 +119,7 @@ captureBtn.addEventListener("click", async () => {
     });
 
     const data = await response.json();
+    extractedEventText = data.text || "";
     extractedText.textContent = data.text || "No text found";
   } catch (error) {
     extractedText.textContent = "Error processing image";
@@ -303,5 +308,97 @@ window.addEventListener("beforeunload", () => {
     synthesis.cancel();
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const addToCalendarBtn = document.getElementById("addToCalendarBtn");
+
+// addToCalendarBtn.addEventListener("click", async () => {
+//   const title = 'dinner'
+//   const date =  '2025-08-01'
+//   const time = '10:30'
+  
+//   const data = 'dinner 2025-08-01 10:30 1 hour'
+
+
+//   if (!title || !date || !time) {
+//     alert("Please fill in all fields.");
+//     return;
+//   }
+
+//   try {
+//     const response = await fetch(`/api/calender-event`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({title,date,time,data}),
+//     });
+
+//     const result = await response.json();
+//     alert(result.message || "Event sent to calendar!");
+//   } catch (error) {
+//     console.error("Calendar error:", error);
+//     alert("Failed to send event to calendar.");
+//   }
+// });
+
+
+
+
+const addToCalendarBtn = document.getElementById("addToCalendarBtn");
+
+addToCalendarBtn.addEventListener("click", async () => {
+  const data = 'dinner 2025-08-01 10:30pm  1 hour'; // You can dynamically create this
+
+  if (!extractedEventText.trim()) {
+    alert("No event text found. Please scan an image with event details.");
+    return;
+  }
+
+
+  try {
+    const response = await fetch("/api/calender-event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data: extractedEventText }),  // Just one field: data
+    });
+
+    const result = await response.json();
+    alert(result.message || "Event sent to calendar!");
+  } catch (error) {
+    console.error("Calendar error:", error);
+    alert("Failed to send event to calendar.");
+  }
+});
+
+
+
+
+
+
+
+
 
 initializeCamera();
